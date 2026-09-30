@@ -12,13 +12,16 @@ cargo test --locked
 
 ## Rules
 
-- **This repository is public.** No real paths, hostnames, usernames, tokens,
-  drive names or job files. Examples only (`config.example.toml`).
-- **Domain-agnostic.** No domain-specific job types, adapters or business
-  logic here; those live in private worker repositories and talk to this
-  service only through the job API (`docs/job-api.md`).
-- **No copyleft dependencies** (GPL/AGPL/LGPL). Check the license of any new
-  crate before adding it.
+- **This repository is public** (Apache-2.0, part of a portfolio). No real
+  paths, hostnames, usernames, tokens, drive names or job files. Examples
+  only (`config.example.toml`).
+- **License decides where code goes.** Anything compatible with Apache-2.0
+  may live here, workers included. Code that depends on copyleft or otherwise
+  incompatibly licensed software (e.g. PyMuPDF, AGPL), or that must not be
+  published, goes in the private `orchestrator-units` repository and talks to
+  this service only through the job API (`docs/job-api.md`).
+- **No copyleft dependencies** (GPL/AGPL/LGPL) in this repository. Check the
+  license of any new crate or package before adding it.
 - **Model output is a draft.** Never add a path where a `gpu` job's result
   triggers an action automatically; `review_required` stays forced for gpu jobs.
 - Keep `src/scheduler.rs` free of I/O so policy stays unit-testable.

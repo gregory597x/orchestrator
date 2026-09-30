@@ -71,11 +71,13 @@ way.
 
 ## What lives elsewhere
 
-This repository is public and domain-agnostic. Domain workers (document
-extraction, other units) live in separate private repositories and talk to
-the orchestrator only through the [job API](job-api.md). In particular,
-copyleft-licensed libraries (e.g. AGPL PDF tooling) stay in those workers
-and are never linked into this codebase.
+This repository is public under Apache-2.0, so what goes where is decided by
+license. Code compatible with Apache-2.0 can live here. Workers that depend
+on copyleft or otherwise incompatibly licensed software (e.g. AGPL PDF
+tooling), or that are not meant to be published, live in a separate private
+repository and talk to the orchestrator only through the
+[job API](job-api.md). Nothing with such a license is ever linked into this
+codebase.
 
 ## Not yet built
 
