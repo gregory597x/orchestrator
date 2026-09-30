@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Example LaunchAgent. Copy to ~/Library/LaunchAgents/, replace the
+  REPLACE_ME paths, then:
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.example.orch-host-agent.plist
+  It must be a LaunchAgent (per-user GUI session), not a LaunchDaemon, so
+  HIDIdleTime reflects your keyboard and mouse.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.example.orch-host-agent</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/zsh</string>
+    <string>REPLACE_ME/orchestrator/host-agent/orch-host-agent.zsh</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>ORCH_URL</key>
+    <string>http://127.0.0.1:8780</string>
+    <key>ORCH_TOKEN_FILE</key>
+    <string>REPLACE_ME/.config/orchestrator/token</string>
+  </dict>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>StandardErrorPath</key>
+  <string>/tmp/orch-host-agent.log</string>
+</dict>
+</plist>

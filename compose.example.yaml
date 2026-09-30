@@ -1,0 +1,26 @@
+# Example: orchestrator in a container, Ollama and the host agent on the Mac.
+#   cp config.example.toml config.toml
+#   mkdir -p secrets && openssl rand -hex 32 > secrets/orch_token
+#   docker compose -f compose.example.yaml up -d
+services:
+  orchestrator:
+    build: .
+    ports:
+      - "127.0.0.1:8780:8780"   # host agent and local tools only
+    volumes:
+      - ./config.toml:/etc/orchestrator/config.toml:ro
+      - orch-data:/data
+    environment:
+      ORCH_TOKEN_FILE: /run/secrets/orch_token
+    secrets:
+      - orch_token
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # reach Ollama on the host
+    restart: unless-stopped
+
+volumes:
+  orch-data:
+
+secrets:
+  orch_token:
+    file: ./secrets/orch_token
