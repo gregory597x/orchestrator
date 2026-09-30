@@ -1,0 +1,31 @@
+# Example orchestrator configuration. Copy to config.toml and adjust.
+# Keep real paths, hostnames and tokens out of this repository.
+
+listen = "0.0.0.0:8780"          # inside a container; the API token is then required
+database = "/data/orchestrator.db"
+lease_ttl_secs = 120
+host_status_stale_secs = 60
+tick_secs = 5
+
+[policy]
+# Background jobs run only after this many seconds without keyboard/mouse input.
+background_idle_secs = 300
+
+# Max concurrently leased jobs per resource.
+[limits.active]   # while the user is working
+cpu = 2
+neural_engine = 1
+gpu = 1
+
+[limits.idle]     # while the host is idle
+cpu = 6
+neural_engine = 2
+gpu = 1
+
+[models]
+ollama_url = "http://host.docker.internal:11434"
+# These models need the whole GPU budget. Entering "solo" mode unloads
+# everything else; every other model counts as resident (normal mode).
+solo = ["qwen3-vl-32b-8k"]
+# Add "deepseek-coder-v2-32k" here if it does not fit next to the resident
+# models on your machine (check `ollama ps`).
